@@ -105,6 +105,8 @@
       display: flex;
       flex-direction: column;
       transition: background 0.3s ease;
+      border-radius: 14px;
+      overflow: hidden;
     }
 
     /* 币种选择 */
@@ -112,7 +114,7 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 6px;
-      padding: 16px 20px 0;
+      padding: 18px 18px 0;
     }
 
     .currency-btn {
@@ -147,7 +149,7 @@
     /* 输入区 */
     .input-area {
       position: relative;
-      padding: 16px 20px 12px;
+      padding: 16px 18px 12px;
     }
 
     #amountInput {
@@ -191,7 +193,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 20px 16px;
+      padding: 12px 18px 16px;
       min-height: 70px;
     }
 
@@ -239,7 +241,7 @@
 
     /* 提示 */
     .hint {
-      padding: 0 20px 14px;
+      padding: 0 18px 18px;
       font-size: 11px;
       color: var(--hint-text);
       text-align: center;
@@ -274,7 +276,7 @@
     /* 清空按钮 */
     .clear-btn {
       position: absolute;
-      right: 28px;
+      right: 26px;
       top: 50%;
       transform: translateY(-50%);
       width: 24px;
