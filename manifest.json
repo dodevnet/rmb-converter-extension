@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "人民币大写转换器",
   "version": "2.0.0",
-  "description": "将小写数字金额快速转换为中文大写人民币写法，支持多币种、右键菜单、历史记录、批量转换",
+  "description": "将小写数字金额快速转换为中文大写人民币写法，支持多币种、右键菜单、历史记录、批量转换、千分位格式化",
   "author": "RMB Converter contributors",
   "homepage_url": "https://github.com/dodevnet/rmb-converter-extension",
   "minimum_chrome_version": "88",
