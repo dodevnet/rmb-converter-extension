@@ -238,9 +238,6 @@ function updateResult(value) {
       thousandSep.textContent = '';
     }
 
-    if (!isError && result && result !== '等待输入…') {
-      addHistory(trimmed, result);
-    }
   }, 200);
 }
 
@@ -283,6 +280,10 @@ function copyResult() {
   const text = resultText.textContent;
   if (!text || text === '等待输入…' || resultText.classList.contains('error')) return;
   copyToClipboard(text);
+  const inputVal = amountInput.value.trim();
+  if (currentMode === 'forward' && inputVal) {
+    addHistory(inputVal, text);
+  }
 }
 
 // ========== 清空（带淡出动画） ==========
@@ -318,6 +319,7 @@ batchConvertBtn.addEventListener('click', () => {
 
   let html = '';
   const outputs = [];
+  const records = [];
 
   lines.forEach(line => {
     const trimmed = line.trim();
@@ -328,25 +330,31 @@ batchConvertBtn.addEventListener('click', () => {
       result = convertToCapital(trimmed, currentCurrency);
     }
     const isError = result.includes('有误') || result.includes('超出') || result.includes('不支持') || result.includes('为空') || result.includes('无法识别');
-    if (!isError && result) outputs.push(result);
+    if (!isError && result) {
+      outputs.push(result);
+      records.push({ amount: trimmed, result });
+    }
 
     html += `<div class="batch-item">
       <span class="batch-input">${escHtml(trimmed)}</span>
       <span class="${isError ? 'batch-error' : 'batch-output'}">${escHtml(result)}</span>
     </div>`;
-    if (!isError && result && result !== '等待输入…') {
-      addHistory(trimmed, result);
-    }
   });
 
   batchResults.innerHTML = html;
   batchResults.classList.remove('hidden');
   batchResults.dataset.allOutputs = outputs.join('\n');
+  batchResults.dataset.records = JSON.stringify(records);
 });
 
 batchCopyBtn.addEventListener('click', () => {
   const allText = batchResults.dataset.allOutputs || '';
   if (allText) copyToClipboard(allText);
+  const recordsJson = batchResults.dataset.records || '[]';
+  try {
+    const records = JSON.parse(recordsJson);
+    records.forEach(r => addHistory(r.amount, r.result));
+  } catch (_) {}
 });
 
 // ========== 键盘 ==========
