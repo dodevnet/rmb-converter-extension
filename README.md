@@ -29,6 +29,10 @@
 
 （如后续补充可放 `screenshots` 目录）
 
+## 仓库地址
+
+[https://github.com/dodevnet/rmb-converter-extension](https://github.com/dodevnet/rmb-converter-extension)
+
 ## License
 
 [MIT](LICENSE)

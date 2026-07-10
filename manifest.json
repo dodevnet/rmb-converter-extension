@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "将小写数字金额快速转换为中文大写人民币写法",
   "author": "RMB Converter contributors",
-  "homepage_url": "https://github.com/your-username/rmb-converter-extension",
+  "homepage_url": "https://github.com/dodevnet/rmb-converter-extension",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
