@@ -33,6 +33,25 @@
 
 [https://github.com/dodevnet/rmb-converter-extension](https://github.com/dodevnet/rmb-converter-extension)
 
+## 更新日志
+
+### v1.1.0 (2026-07-11)
+
+- **安全**：移除不必要的 `clipboardRead` 权限，遵循最小权限原则
+- **体验**：复制成功后显示 Toast 提示，不再静默复制
+- **体验**：新增输入框清空按钮（×），支持 Escape 键清空
+- **体验**：复制时过滤错误提示，仅复制有效的大写结果
+- **无障碍**：币种按钮添加 `aria-label`、`role="radio"` 和键盘导航（方向键 / Enter / Space）
+- **无障碍**：结果区域添加 `role="status"` + `aria-live="polite"`，屏幕阅读器可自动播报
+- **代码**：完善 JSDoc 注释，补充函数参数与返回值说明
+- **清单**：添加 `minimum_chrome_version: "88"`
+
+### v1.0.0 (2026-05-13)
+
+- 初始版本，支持人民币 / 美元 / 沙特里亚尔 / 阿联酋迪拉姆 / 乌干达先令五种币种
+- 自动实时转换，支持负数、最多两位小数
+- 点击结果一键复制到剪贴板
+
 ## License
 
 [MIT](LICENSE)

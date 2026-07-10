@@ -1,10 +1,11 @@
 {
   "manifest_version": 3,
   "name": "人民币大写转换器",
-  "version": "1.0.0",
-  "description": "将小写数字金额快速转换为中文大写人民币写法",
+  "version": "1.1.0",
+  "description": "将小写数字金额快速转换为中文大写人民币写法，支持多币种",
   "author": "RMB Converter contributors",
   "homepage_url": "https://github.com/dodevnet/rmb-converter-extension",
+  "minimum_chrome_version": "88",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -21,7 +22,7 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "permissions": ["clipboardWrite", "clipboardRead"],
+  "permissions": ["clipboardWrite"],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   }

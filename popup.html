@@ -157,29 +157,84 @@
     .hint.hidden {
       display: none;
     }
+
+    /* 复制成功 Toast */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(16, 185, 129, 0.9);
+      color: #fff;
+      font-size: 13px;
+      padding: 8px 20px;
+      border-radius: 20px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s;
+      z-index: 10;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    /* 清空按钮 */
+    .clear-btn {
+      position: absolute;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 14px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, color 0.15s;
+      line-height: 1;
+    }
+
+    .clear-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .clear-btn.visible {
+      display: flex;
+    }
+
+    .input-area {
+      position: relative;
+    }
   </style>
 </head>
 <body>
 
   <div class="currency-bar">
-    <button class="currency-btn active" data-currency="CNY">
-      <span class="symbol">¥</span>
+    <button class="currency-btn active" data-currency="CNY" tabindex="0" aria-label="人民币" role="radio" aria-checked="true">
+      <span class="symbol" aria-hidden="true">¥</span>
       人民币
     </button>
-    <button class="currency-btn" data-currency="USD">
-      <span class="symbol">$</span>
+    <button class="currency-btn" data-currency="USD" tabindex="0" aria-label="美元" role="radio" aria-checked="false">
+      <span class="symbol" aria-hidden="true">$</span>
       美元
     </button>
-    <button class="currency-btn" data-currency="SAR">
-      <span class="symbol">﷼</span>
+    <button class="currency-btn" data-currency="SAR" tabindex="0" aria-label="沙特里亚尔" role="radio" aria-checked="false">
+      <span class="symbol" aria-hidden="true">﷼</span>
       里亚尔
     </button>
-    <button class="currency-btn" data-currency="AED">
-      <span class="symbol">د.إ</span>
+    <button class="currency-btn" data-currency="AED" tabindex="0" aria-label="阿联酋迪拉姆" role="radio" aria-checked="false">
+      <span class="symbol" aria-hidden="true">د.إ</span>
       迪拉姆
     </button>
-    <button class="currency-btn" data-currency="UGX">
-      <span class="symbol">USh</span>
+    <button class="currency-btn" data-currency="UGX" tabindex="0" aria-label="乌干达先令" role="radio" aria-checked="false">
+      <span class="symbol" aria-hidden="true">USh</span>
       先令
     </button>
   </div>
@@ -191,14 +246,18 @@
       placeholder="输入金额"
       autocomplete="off"
       autofocus
+      aria-label="输入小写金额数字"
     >
+    <button class="clear-btn" id="clearBtn" aria-label="清空输入" tabindex="0">&times;</button>
   </div>
 
   <div class="result-area">
-    <span id="resultText">等待输入…</span>
+    <span id="resultText" role="status" aria-live="polite" aria-label="转换结果">等待输入…</span>
   </div>
 
   <div class="hint" id="hint">点击结果复制</div>
+
+  <div class="toast" id="toast">已复制</div>
 
   <script src="converter.js"></script>
   <script src="popup.js"></script>
