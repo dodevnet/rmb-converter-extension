@@ -5,13 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>金额大写转换</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ===== 主题色彩变量 ===== */
     :root {
       --bg: #f8f9fa;
       --text: #1e293b;
@@ -51,6 +46,13 @@
       --hint-text: #94a3b8;
       --shadow-glow: 0 0 24px rgba(245, 158, 11, 0.12);
       --border-color: #e0e0e0;
+      --history-bg: rgba(0,0,0,0.02);
+      --history-border: #e2e8f0;
+      --history-hover: rgba(245,158,11,0.04);
+      --tab-active-bg: var(--accent-bg);
+      --tab-active-text: var(--accent-text);
+      --tab-inactive-text: var(--text-muted);
+      --separator: #e2e8f0;
       --radius-sm: 8px;
       --radius-md: 10px;
       --radius-lg: 12px;
@@ -61,55 +63,61 @@
         --bg: #1e1e2e;
         --text: #e2e8f0;
         --text-secondary: #94a3b8;
-        --text-muted: rgba(255, 255, 255, 0.25);
-        --placeholder: rgba(245, 158, 11, 0.35);
-        --border: rgba(255, 255, 255, 0.1);
+        --text-muted: rgba(255,255,255,0.25);
+        --placeholder: rgba(245,158,11,0.35);
+        --border: rgba(255,255,255,0.1);
         --accent: #f59e0b;
         --accent-text: #f59e0b;
-        --accent-bg: rgba(245, 158, 11, 0.08);
-        --accent-bg-hover: rgba(245, 158, 11, 0.14);
-        --accent-border: rgba(245, 158, 11, 0.3);
-        --accent-border-focus: rgba(245, 158, 11, 0.6);
-        --accent-shadow: rgba(245, 158, 11, 0.1);
+        --accent-bg: rgba(245,158,11,0.08);
+        --accent-bg-hover: rgba(245,158,11,0.14);
+        --accent-border: rgba(245,158,11,0.3);
+        --accent-border-focus: rgba(245,158,11,0.6);
+        --accent-shadow: rgba(245,158,11,0.1);
         --result-text: #fbbf24;
-        --result-bg: rgba(245, 158, 11, 0.06);
-        --result-bg-hover: rgba(245, 158, 11, 0.1);
-        --result-border: rgba(255, 255, 255, 0.15);
-        --result-empty-text: rgba(255, 255, 255, 0.25);
+        --result-bg: rgba(245,158,11,0.06);
+        --result-bg-hover: rgba(245,158,11,0.1);
+        --result-border: rgba(255,255,255,0.15);
+        --result-empty-text: rgba(255,255,255,0.25);
         --error-text: #f87171;
-        --error-bg: rgba(248, 113, 113, 0.04);
-        --error-border: rgba(248, 113, 113, 0.2);
-        --btn-bg: rgba(255, 255, 255, 0.05);
-        --btn-text: rgba(255, 255, 255, 0.4);
-        --btn-border: rgba(255, 255, 255, 0.1);
-        --btn-hover-bg: rgba(255, 255, 255, 0.1);
-        --btn-hover-text: rgba(255, 255, 255, 0.7);
-        --btn-active-bg: rgba(245, 158, 11, 0.15);
-        --btn-active-border: rgba(245, 158, 11, 0.5);
+        --error-bg: rgba(248,113,113,0.04);
+        --error-border: rgba(248,113,113,0.2);
+        --btn-bg: rgba(255,255,255,0.05);
+        --btn-text: rgba(255,255,255,0.4);
+        --btn-border: rgba(255,255,255,0.1);
+        --btn-hover-bg: rgba(255,255,255,0.1);
+        --btn-hover-text: rgba(255,255,255,0.7);
+        --btn-active-bg: rgba(245,158,11,0.15);
+        --btn-active-border: rgba(245,158,11,0.5);
         --btn-active-text: #f59e0b;
-        --toast-bg: rgba(16, 185, 129, 0.9);
+        --toast-bg: rgba(16,185,129,0.9);
         --toast-text: #ffffff;
-        --clear-bg: rgba(255, 255, 255, 0.1);
-        --clear-color: rgba(255, 255, 255, 0.4);
-        --clear-hover-bg: rgba(255, 255, 255, 0.2);
-        --clear-hover-color: rgba(255, 255, 255, 0.7);
-        --hint-text: rgba(255, 255, 255, 0.25);
-        --shadow-glow: 0 0 30px rgba(251, 191, 36, 0.3);
+        --clear-bg: rgba(255,255,255,0.1);
+        --clear-color: rgba(255,255,255,0.4);
+        --clear-hover-bg: rgba(255,255,255,0.2);
+        --clear-hover-color: rgba(255,255,255,0.7);
+        --hint-text: rgba(255,255,255,0.25);
+        --shadow-glow: 0 0 30px rgba(251,191,36,0.3);
         --border-color: #3a3a4a;
+        --history-bg: rgba(255,255,255,0.03);
+        --history-border: rgba(255,255,255,0.12);
+        --history-hover: rgba(245,158,11,0.06);
+        --tab-active-bg: var(--accent-bg);
+        --tab-active-text: var(--accent-text);
+        --tab-inactive-text: var(--text-muted);
+        --separator: rgba(255,255,255,0.1);
       }
     }
 
     html {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: var(--bg);
       overflow: hidden;
       border-radius: 14px;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(0,0,0,0.04);
     }
 
     body {
-      width: 340px;
+      width: 370px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
       background: var(--bg);
       min-height: 160px;
@@ -121,13 +129,63 @@
       overflow: hidden;
     }
 
-    /* 币种选择 */
+    /* Tab */
+    .tab-bar {
+      display: flex;
+      padding: 12px 18px 0;
+      gap: 2px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 8px 4px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--tab-inactive-text);
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn.active {
+      color: var(--tab-active-text);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-btn:hover { color: var(--text-secondary); }
+
+    .batch-toggle {
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--btn-text);
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-left: 4px;
+      white-space: nowrap;
+    }
+
+    .batch-toggle.active {
+      background: var(--btn-active-bg);
+      border-color: var(--btn-active-border);
+      color: var(--btn-active-text);
+    }
+
+    /* Currency */
     .currency-bar {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 6px;
-      padding: 18px 18px 0;
+      padding: 12px 18px 0;
     }
+
+    .currency-bar.hidden { display: none; }
 
     .currency-btn {
       padding: 8px 4px;
@@ -141,33 +199,20 @@
       transition: all 0.2s ease;
     }
 
-    .currency-btn:hover {
-      background: var(--btn-hover-bg);
-      color: var(--btn-hover-text);
-    }
+    .currency-btn:hover { background: var(--btn-hover-bg); color: var(--btn-hover-text); }
+    .currency-btn.active { background: var(--btn-active-bg); border-color: var(--btn-active-border); color: var(--btn-active-text); }
+    .currency-btn .symbol { display: block; font-size: 16px; margin-bottom: 2px; }
 
-    .currency-btn.active {
-      background: var(--btn-active-bg);
-      border-color: var(--btn-active-border);
-      color: var(--btn-active-text);
-    }
-
-    .currency-btn .symbol {
-      display: block;
-      font-size: 16px;
-      margin-bottom: 2px;
-    }
-
-    /* 输入区 */
+    /* Input */
     .input-area {
       position: relative;
-      padding: 16px 18px 12px;
+      padding: 14px 18px 4px;
     }
 
     #amountInput {
       width: 100%;
-      padding: 14px 18px;
-      font-size: 22px;
+      padding: 12px 18px;
+      font-size: 20px;
       font-family: 'SF Mono', 'Cascadia Code', 'Menlo', monospace;
       font-weight: 500;
       color: var(--accent-text);
@@ -175,58 +220,107 @@
       border: 2px solid var(--accent-border);
       border-radius: var(--radius-lg);
       outline: none;
-      -moz-appearance: textfield;
       text-align: center;
       letter-spacing: 2px;
       transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     #amountInput::-webkit-outer-spin-button,
-    #amountInput::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-    }
+    #amountInput::-webkit-inner-spin-button { -webkit-appearance: none; }
 
-    #amountInput::placeholder {
-      color: var(--placeholder);
+    #amountInput::placeholder { color: var(--placeholder); font-size: 13px; font-weight: 400; letter-spacing: 0; }
+    #amountInput:focus { background: var(--accent-bg-hover); border-color: var(--accent-border-focus); box-shadow: 0 0 0 4px var(--accent-shadow); }
+
+    .batch-textarea {
+      width: 100%;
+      padding: 12px 14px;
       font-size: 14px;
+      font-family: 'SF Mono', 'Cascadia Code', 'Menlo', monospace;
       font-weight: 400;
-      letter-spacing: 0;
+      color: var(--accent-text);
+      background: var(--accent-bg);
+      border: 2px solid var(--accent-border);
+      border-radius: var(--radius-lg);
+      outline: none;
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.6;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    #amountInput:focus {
-      background: var(--accent-bg-hover);
-      border-color: var(--accent-border-focus);
-      box-shadow: 0 0 0 4px var(--accent-shadow);
+    .batch-textarea:focus { background: var(--accent-bg-hover); border-color: var(--accent-border-focus); box-shadow: 0 0 0 4px var(--accent-shadow); }
+    .hidden { display: none !important; }
+
+    .thousand-sep {
+      padding: 2px 18px 0;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'SF Mono', 'Cascadia Code', 'Menlo', monospace;
+      min-height: 18px;
+      text-align: center;
     }
 
-    /* 结果区 */
+    .clear-btn {
+      position: absolute;
+      right: 26px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: none;
+      background: var(--clear-bg);
+      color: var(--clear-color);
+      font-size: 14px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, color 0.15s, opacity 0.2s;
+      line-height: 1;
+      z-index: 2;
+    }
+
+    .clear-btn:hover { background: var(--clear-hover-bg); color: var(--clear-hover-color); }
+    .clear-btn.visible { display: flex; }
+    .clear-btn.fade-out { opacity: 0; pointer-events: none; }
+
+    /* Result */
     .result-area {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 18px 16px;
-      min-height: 70px;
+      padding: 8px 18px 10px;
+      min-height: 56px;
     }
 
     #resultText {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 500;
       color: var(--result-empty-text);
       letter-spacing: 1px;
       text-align: center;
       cursor: pointer;
-      padding: 12px 16px;
+      padding: 10px 16px;
       border-radius: var(--radius-sm);
       border: 1px dashed var(--result-border);
       transition: all 0.3s ease;
-      min-height: 48px;
+      min-height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       line-height: 1.5;
       word-break: break-word;
       width: 100%;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    #resultText.pop-in { animation: popIn 0.3s ease; }
+
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
     #resultText.filled {
@@ -236,9 +330,7 @@
       text-shadow: var(--shadow-glow);
     }
 
-    #resultText.filled:hover {
-      background: var(--result-bg-hover);
-    }
+    #resultText.filled:hover { background: var(--result-bg-hover); }
 
     #resultText.error {
       color: var(--error-text);
@@ -251,115 +343,223 @@
       text-shadow: none;
     }
 
-    /* 提示 */
+    .loading-dots { display: none; align-items: center; gap: 4px; padding: 0 4px; }
+    .loading-dots.active { display: inline-flex; }
+
+    .loading-dots span {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: dotBounce 1.2s infinite ease-in-out;
+    }
+
+    .loading-dots span:nth-child(1) { animation-delay: 0s; }
+    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dotBounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Batch results */
+    .batch-results {
+      padding: 8px 18px 10px;
+      max-height: 160px;
+      overflow-y: auto;
+    }
+
+    .batch-results .batch-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 10px;
+      font-size: 12px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .batch-results .batch-item:last-child { border-bottom: none; }
+    .batch-item .batch-input { color: var(--text-secondary); font-family: 'SF Mono', monospace; max-width: 40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .batch-item .batch-output { color: var(--result-text); text-align: right; word-break: break-all; }
+    .batch-item .batch-error { color: var(--error-text); text-align: right; }
+
+    .batch-actions {
+      display: flex; gap: 6px; padding: 4px 18px 8px;
+    }
+
+    .batch-actions button {
+      flex: 1; padding: 8px; font-size: 12px; font-weight: 500;
+      border-radius: var(--radius-sm); border: 1px solid var(--btn-border);
+      cursor: pointer; transition: all 0.2s ease;
+    }
+
+    .btn-convert { background: var(--accent-bg); color: var(--accent-text); border-color: var(--accent-border); }
+    .btn-convert:hover { background: var(--accent-bg-hover); }
+    .btn-copy-all { background: var(--btn-bg); color: var(--btn-text); }
+    .btn-copy-all:hover { background: var(--btn-hover-bg); color: var(--btn-hover-text); }
+
+    /* Hint */
     .hint {
-      padding: 0 18px 18px;
+      padding: 0 18px 10px;
       font-size: 11px;
       color: var(--hint-text);
       text-align: center;
       letter-spacing: 0.5px;
     }
 
-    .hint.hidden {
-      display: none;
-    }
+    /* History */
+    .history-section { border-top: 1px solid var(--separator); }
 
-    /* 复制成功 Toast */
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--toast-bg);
-      color: var(--toast-text);
-      font-size: 13px;
-      padding: 8px 20px;
-      border-radius: var(--radius-md);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.25s;
-      z-index: 10;
-    }
-
-    .toast.show {
-      opacity: 1;
-    }
-
-    /* 清空按钮 */
-    .clear-btn {
-      position: absolute;
-      right: 26px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: none;
-      background: var(--clear-bg);
-      color: var(--clear-color);
-      font-size: 14px;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s, color 0.15s;
-      line-height: 1;
-    }
-
-    .clear-btn:hover {
-      background: var(--clear-hover-bg);
-      color: var(--clear-hover-color);
-    }
-
-    .clear-btn.visible {
+    .history-header {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 18px;
+      cursor: pointer;
+      user-select: none;
     }
+
+    .history-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .history-arrow { font-size: 10px; transition: transform 0.2s; color: var(--text-muted); }
+    .history-header.expanded .history-arrow { transform: rotate(90deg); }
+    .history-count { font-size: 11px; color: var(--text-muted); }
+    .history-actions { display: flex; gap: 8px; align-items: center; }
+
+    .history-clear {
+      font-size: 11px; color: var(--text-muted);
+      background: none; border: none; cursor: pointer;
+      padding: 2px 6px; border-radius: 4px; transition: all 0.15s;
+    }
+
+    .history-clear:hover { color: var(--error-text); background: var(--error-bg); }
+
+    .history-list { max-height: 160px; overflow-y: auto; padding: 0 18px 10px; display: none; }
+    .history-list.open { display: block; }
+
+    .history-item {
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--history-border);
+      font-size: 12px;
+    }
+
+    .history-item:last-child { border-bottom: none; }
+    .history-item:hover { background: var(--history-hover); }
+    .history-item .h-amount { font-family: 'SF Mono', monospace; color: var(--text-secondary); white-space: nowrap; }
+    .history-item .h-result { color: var(--result-text); margin-left: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; text-align: right; }
+    .history-item .h-time { font-size: 10px; color: var(--text-muted); margin-left: 8px; white-space: nowrap; }
+
+    .history-empty {
+      text-align: center; font-size: 12px;
+      color: var(--text-muted); padding: 16px 0;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 18px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--toast-bg); color: var(--toast-text);
+      font-size: 13px; padding: 8px 20px;
+      border-radius: var(--radius-md);
+      pointer-events: none; opacity: 0;
+      transition: opacity 0.25s; z-index: 10;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .toast.show { opacity: 1; }
+
+    .toast .checkmark {
+      display: inline-block; width: 16px; height: 16px;
+      stroke: white; stroke-width: 2; fill: none;
+      transform: scale(0);
+      transition: transform 0.2s ease 0.05s;
+    }
+
+    .toast.show .checkmark { animation: checkPop 0.3s ease 0.05s forwards; }
+
+    @keyframes checkPop {
+      0%   { transform: scale(0); }
+      60%  { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
   </style>
 </head>
 <body>
 
-  <div class="currency-bar">
-    <button class="currency-btn active" data-currency="CNY" tabindex="0" aria-label="人民币" role="radio" aria-checked="true">
-      <span class="symbol" aria-hidden="true">¥</span>
-      人民币
-    </button>
-    <button class="currency-btn" data-currency="USD" tabindex="0" aria-label="美元" role="radio" aria-checked="false">
-      <span class="symbol" aria-hidden="true">$</span>
-      美元
-    </button>
-    <button class="currency-btn" data-currency="SAR" tabindex="0" aria-label="沙特里亚尔" role="radio" aria-checked="false">
-      <span class="symbol" aria-hidden="true">﷼</span>
-      里亚尔
-    </button>
-    <button class="currency-btn" data-currency="AED" tabindex="0" aria-label="阿联酋迪拉姆" role="radio" aria-checked="false">
-      <span class="symbol" aria-hidden="true">د.إ</span>
-      迪拉姆
-    </button>
-    <button class="currency-btn" data-currency="UGX" tabindex="0" aria-label="乌干达先令" role="radio" aria-checked="false">
-      <span class="symbol" aria-hidden="true">USh</span>
-      先令
-    </button>
+  <div class="tab-bar">
+    <button class="tab-btn active" data-mode="forward">数字→大写</button>
+    <button class="tab-btn" data-mode="reverse">大写→数字</button>
+    <button class="batch-toggle" id="batchToggle">批量</button>
   </div>
 
-  <div class="input-area">
-    <input
-      type="text"
-      id="amountInput"
-      placeholder="输入金额"
-      autocomplete="off"
-      autofocus
-      aria-label="输入小写金额数字"
-    >
-    <button class="clear-btn" id="clearBtn" aria-label="清空输入" tabindex="0">&times;</button>
+  <div class="currency-bar" id="currencyBar">
+    <button class="currency-btn active" data-currency="CNY" role="radio" aria-checked="true"><span class="symbol">¥</span>人民币</button>
+    <button class="currency-btn" data-currency="USD" role="radio" aria-checked="false"><span class="symbol">$</span>美元</button>
+    <button class="currency-btn" data-currency="SAR" role="radio" aria-checked="false"><span class="symbol">﷼</span>里亚尔</button>
+    <button class="currency-btn" data-currency="AED" role="radio" aria-checked="false"><span class="symbol">د.إ</span>迪拉姆</button>
+    <button class="currency-btn" data-currency="UGX" role="radio" aria-checked="false"><span class="symbol">USh</span>先令</button>
   </div>
 
-  <div class="result-area">
-    <span id="resultText" role="status" aria-live="polite" aria-label="转换结果">等待输入…</span>
+  <div class="input-area" id="singleInputArea">
+    <input type="text" id="amountInput" placeholder="输入金额" autocomplete="off" autofocus>
+    <button class="clear-btn" id="clearBtn">&times;</button>
+  </div>
+
+  <div class="input-area hidden" id="batchInputArea">
+    <textarea class="batch-textarea" id="batchTextarea" placeholder="每行输入一个金额" rows="3"></textarea>
+  </div>
+
+  <div class="thousand-sep" id="thousandSep"></div>
+
+  <div class="batch-actions hidden" id="batchActions">
+    <button class="btn-convert" id="batchConvertBtn">转换</button>
+    <button class="btn-copy-all" id="batchCopyBtn">一键复制全部</button>
+  </div>
+
+  <div class="batch-results hidden" id="batchResults"></div>
+
+  <div class="result-area" id="singleResultArea">
+    <span id="resultText" role="status" aria-live="polite">等待输入…</span>
   </div>
 
   <div class="hint" id="hint">点击结果复制</div>
 
-  <div class="toast" id="toast">已复制</div>
+  <div class="history-section" id="historySection">
+    <div class="history-header" id="historyHeader">
+      <span class="history-title">
+        <span class="history-arrow">▶</span>历史记录
+        <span class="history-count" id="historyCount"></span>
+      </span>
+      <div class="history-actions">
+        <button class="history-clear" id="historyClear">清空</button>
+      </div>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="history-empty">暂无记录</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <svg class="checkmark" viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg>
+    <span id="toastText">已复制</span>
+  </div>
 
   <script src="converter.js"></script>
   <script src="popup.js"></script>
