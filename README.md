@@ -66,6 +66,10 @@ node converter.test.js
 
 ## 更新日志
 
+### v2.0.2 (2026-07-11)
+
+- **修复**：历史记录竞态条件 — `loadHistory()` 改为返回 Promise，`addHistory()` 内部 `await historyReady`，确保 chrome.storage.local 异步读取完成前不会因空数组覆盖新记录
+
 ### v2.0.1 (2026-07-11)
 
 - **修复**：确认历史记录（chrome.storage.local 读写/渲染/折叠/复制/清空）功能完整可用

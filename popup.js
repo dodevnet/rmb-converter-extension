@@ -36,6 +36,8 @@ let isBatch = false;
 let toastTimer = null;
 let debounceTimer = null;
 let historyItems = [];
+let historyReadyResolve = null;
+const historyReady = new Promise((resolve) => { historyReadyResolve = resolve; });
 
 // ========== 历史记录 ==========
 
@@ -43,9 +45,13 @@ const HISTORY_KEY = 'rmb_converter_history';
 const MAX_HISTORY = 20;
 
 function loadHistory() {
-  chrome.storage.local.get([HISTORY_KEY], (data) => {
-    historyItems = data[HISTORY_KEY] || [];
-    renderHistory();
+  return new Promise((resolve) => {
+    chrome.storage.local.get([HISTORY_KEY], (data) => {
+      historyItems = data[HISTORY_KEY] || [];
+      renderHistory();
+      historyReadyResolve();
+      resolve();
+    });
   });
 }
 
@@ -56,7 +62,8 @@ function saveHistory() {
   chrome.storage.local.set({ [HISTORY_KEY]: historyItems });
 }
 
-function addHistory(amount, result) {
+async function addHistory(amount, result) {
+  await historyReady;
   const idx = historyItems.findIndex(h => h.amount === amount && h.result === result);
   if (idx !== -1) historyItems.splice(idx, 1);
   historyItems.unshift({ amount, result, time: Date.now() });
